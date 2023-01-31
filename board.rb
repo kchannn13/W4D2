@@ -28,10 +28,12 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        if !@rows[start_pos].is_a?(Piece) || !@rows[end_pos].is_a?(NullPiece)
-            raise "Ivalid move"
+        # if !@rows[start_pos].is_a?(Piece) || !@rows[end_pos].is_a?(NullPiece)
+        #     raise "Ivalid move"
+        # end
+        if !self[start_pos].is_a?(Piece) || !self[end_pos].is_a?(NullPiece)
+            raise "Invalid move"
         end
-
-
     end
+
 end

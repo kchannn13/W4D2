@@ -1,6 +1,13 @@
+require_relative 'board'
 class Piece
-    def initialize(val)
-        @val = val
+    def initialize(color, board, pos)
+        @color = "symbol"
+        @board = "board"
+        @pos = pos
+
+    end
+
+    def to_s
     end
 end
 
