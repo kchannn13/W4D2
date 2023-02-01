@@ -1,15 +1,17 @@
 module Slideable
 
 # HORIZONTAL_DIRS stores an array of horizontal directions
-  # when a piece moves in a given direction, its row and/or its column should increment by some value
-  # ex: A piece starts at position [1, 2] and it moves horizontally to the right
+  # when a piece moves in a given direction, its row and/or 
+  # its column should increment by some value
+  # ex: A piece starts at position [1, 2] and it moves horizontally 
+  # to the right
     # its position changes to [1,3]
     # the row increases by 0 and the column increases by 1
   HORIZONTAL_DIRS = [
-    [:dx,:dy], # left
-    [:dx,:dy], # right
-    [:dx,:dy], # up (vertical)
-    [:dx,:dy], # down (vertical)
+    [-1,0], # left
+    [1,0], # right
+    [0,-1], # up (vertical)
+    [0,1], # down (vertical)
   ].freeze # freeze makes it not possible to change an object
 
   DIAGONAL_DIRS = [
@@ -39,6 +41,16 @@ module Slideable
 
     # return the final array of moves (containing all possible moves in all directions)
     move_dirs
+    all_possible_cells = []
+    move_dirs.each do |direction|
+      #if self.pod[0] < 0 && self[0] >
+      (0..7).each do |n|
+        new_pos = [self.pos[0] + n * direction[0], self.pos[1] + n * direction[1]]
+        if new_pos[0] <= 7 && new_pos[0] >= 0 && new_pos[1] <= 7 && new_pos[1] >= 0
+          all_possible_cells << new_pos
+        end
+      end
+    end
   end
 
   private
@@ -48,18 +60,25 @@ module Slideable
   end
 
 
-  # this helper method is only responsible for collecting all moves in a given direction
-  # the given direction is represented by two args, the combination of a dx and dy
+  # this helper method is only responsible for collecting all moves 
+  # in a given direction
+  # the given direction is represented by two args, 
+  # the combination of a dx and dy
   def grow_unblocked_moves_in_dir(dx, dy)
     # create an array to collect moves
 
     # get the piece's current row and current column
 
     # in a loop:
-      # continually increment the piece's current row and current column to generate a new position
-      # stop looping if the new position is invalid (not on the board); the piece can't move in this direction
-      # if the new position is empty, the piece can move here, so add the new position to the moves array
-      # if the new position is occupied with a piece of the opposite color, the piece can move here (to capture the opposing piece), so add the new position to the moves array
+      # continually increment the piece's current row and 
+      # current column to generate a new position
+      # stop looping if the new position is invalid (not on the board); 
+      # the piece can't move in this direction
+      # if the new position is empty, the piece can move here, 
+      # so add the new position to the moves array
+      # if the new position is occupied with a 
+      # piece of the opposite color, the piece can move here 
+      # (to capture the opposing piece), so add the new position to the moves array
         # but, the piece cannot continue to move past this piece, so stop looping
       # if the new position is occupied with a piece of the same color, stop looping
 

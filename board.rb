@@ -6,12 +6,12 @@ class Board
         row = [0,1,6,7]
         row.each do |r|
             (0..7).each do |c|
-                @rows[r][c] = Piece.new("")
+                @rows[r][c] = Piece.new(:white, self, [r,c]))
             end
         end
         (2..5).each do |r|
             (0..7).each do |c|
-                @rows[r][c] = NullPiece.new("a")
+                @rows[r][c] = NullPiece.instance
             end
         end
 
