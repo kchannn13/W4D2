@@ -40,30 +40,9 @@ module Slideable
     # checks if the cell is empty and checks what color a figure is in this cell 
 
     # return the final array of moves (containing all possible moves in all directions)
-    move_dirs
-    # all_possible_cells = []
-    all_possible_cells = []
-      move_dirs.each do |direction|
-        #if self.pod[0] < 0 && self[0] >
-        (1..7).each do |n|
-          new_pos = [self.pos[0] + n * direction[0], self.pos[1] + n * direction[1]]
-          if new_pos[0] > 7 || new_pos[0] < 0 || new_pos[1] > 7 || new_pos[1] < 0
-            break
-            # (board[new_pos].is_a?(NullPiece) || board[new_pos].color != board[pos].color)
-          end
-          if (board[new_pos].is_a?(NullPiece))
-            all_possible_cells << new_pos 
-          else
-            if board[new_pos].color == board[pos].color
-              break
-            else
-              all_possible_cells << new_pos
-              break 
-            end
-          end
-        end
-      end
-      all_possible_cells
+    
+    grow_unblocked_moves_in_dir
+    
     # return the final moves array
   end
 
@@ -78,7 +57,7 @@ module Slideable
   # in a given direction
   # the given direction is represented by two args, 
   # the combination of a dx and dy
-  def grow_unblocked_moves_in_dir(dx, dy)
+  def grow_unblocked_moves_in_dir#(dx, dy)
     # create an array to collect moves
 
     # get the piece's current row and current column

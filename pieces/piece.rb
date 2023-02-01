@@ -9,10 +9,8 @@ class Piece
 
     # def to_s
     # end
-end
-
-class NullPiece < Piece
-    def initialize(val)
-        @val = val
+    def empty?
+        false
     end
 end
+
