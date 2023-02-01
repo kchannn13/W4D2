@@ -6,7 +6,7 @@ class Board
         row = [0,1,6,7]
         row.each do |r|
             (0..7).each do |c|
-                @rows[r][c] = Piece.new(:white, self, [r,c]))
+                @rows[r][c] = Piece.new(:white, self, [r,c])
             end
         end
         (2..5).each do |r|

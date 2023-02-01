@@ -15,10 +15,10 @@ module Slideable
   ].freeze # freeze makes it not possible to change an object
 
   DIAGONAL_DIRS = [
-    [:dx,:dy], # up + left
-    [:dx,:dy], # up + right
-    [:dx,:dy], # down + left
-    [:dx,:dy], # down + right
+    [-1,-1], # up + left
+    [-1,1], # up + right
+    [1,-1], # down + left
+    [1,1], # down + right
   ].freeze
 
   def horizontal_dirs 
@@ -44,9 +44,10 @@ module Slideable
     all_possible_cells = []
     move_dirs.each do |direction|
       #if self.pod[0] < 0 && self[0] >
-      (0..7).each do |n|
+      (1..7).each do |n|
         new_pos = [self.pos[0] + n * direction[0], self.pos[1] + n * direction[1]]
-        if new_pos[0] <= 7 && new_pos[0] >= 0 && new_pos[1] <= 7 && new_pos[1] >= 0
+        if new_pos[0] <= 7 && new_pos[0] >= 0 && new_pos[1] <= 7 && new_pos[1] >= 0 &&
+          (board[new_pos].is_a?(NullPiece) || board[new_pos].color != board[pos].color) 
           all_possible_cells << new_pos
         end
       end
@@ -69,6 +70,9 @@ module Slideable
 
     # get the piece's current row and current column
 
+    # row_current = self.pos[0]
+    # col_current = self.pos[1]
+
     # in a loop:
       # continually increment the piece's current row and 
       # current column to generate a new position
@@ -81,7 +85,28 @@ module Slideable
       # (to capture the opposing piece), so add the new position to the moves array
         # but, the piece cannot continue to move past this piece, so stop looping
       # if the new position is occupied with a piece of the same color, stop looping
-
+      all_possible_cells = []
+      move_dirs.each do |direction|
+        #if self.pod[0] < 0 && self[0] >
+        (1..7).each do |n|
+          new_pos = [self.pos[0] + n * direction[0], self.pos[1] + n * direction[1]]
+          if new_pos[0] > 7 || new_pos[0] < 0 || new_pos[1] > 7 || new_pos[1] < 0
+            break
+            # (board[new_pos].is_a?(NullPiece) || board[new_pos].color != board[pos].color)
+          end
+          if (board[new_pos].is_a?(NullPiece))
+            all_possible_cells << new_pos 
+          else
+            if board[new_pos].color == board[pos].color
+              break
+            else
+              all_possible_cells << new_pos
+              break 
+            end
+          end
+        end
+      end
+      all_possible_cells
     # return the final moves array
   end
 end
