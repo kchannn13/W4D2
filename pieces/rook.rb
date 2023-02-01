@@ -5,14 +5,15 @@ class Rook < Piece
   include Slideable
 
   def symbol
-    ''.colorize(color)
+    '♜'.colorize(color)
   end
 
   protected
 
   def move_dirs
-    #return directions how a bishop can move
+    # return the directions in which a rook can move
+    # a rook can move horizontally (across rows and columns)
     horizontal_dirs
+    
   end
-
 end

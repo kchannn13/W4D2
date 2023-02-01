@@ -5,13 +5,13 @@ class Bishop < Piece
   include Slideable
 
   def symbol
-    'U+2657'.colorize(color)
+    '♝'.colorize(color)
   end
 
   protected
 
   def move_dirs
-    #return directions how a bishop can move
+    # return the directions in which a bishop can move
+    # a bishop can move diagonally
   end
-
 end
